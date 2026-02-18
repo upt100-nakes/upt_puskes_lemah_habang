@@ -1,128 +1,240 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TOSS TB - Aplikasi Pendamping Pengobatan Tuberkulosis</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary-green: #00875A;
+            --secondary-green: #00A36C;
+            --light-green-bg: #F0FDF4;
+            --text-dark: #1E293B;
+            --text-light: #475569;
+            --border-color: #E2E8F0;
+            --white: #FFFFFF;
+            --warning-bg: #FEFCE8;
+            --warning-border: #FACC15;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            line-height: 1.6;
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            line-height: 1.7;
             margin: 0;
             padding: 0;
-            background-color: #f4f7f6;
-            color: #333;
+            background-color: var(--light-green-bg);
+            color: var(--text-dark);
         }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 10px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .navbar-content {
+            display: flex;
+            align-items: center;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .navbar-icon {
+            width: 40px;
+            height: 40px;
+        }
+
+        .navbar-title {
+            font-weight: 800;
+            font-size: 1.2em;
+            color: var(--primary-green);
+            margin-left: 10px;
+        }
+
         .container {
             max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin: 30px auto;
+            padding: 0 20px;
         }
+
+        .card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+        }
+        
         .header {
             text-align: center;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 20px;
+            padding: 40px 20px;
+        }
+
+        .app-icon {
+            width: 120px;
+            height: 120px;
+            border-radius: 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 20px rgba(0, 135, 90, 0.2);
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, var(--primary-green), var(--secondary-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            color: var(--text-light);
+        }
+
+        h2 {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--primary-green);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+            margin-top: 0;
             margin-bottom: 20px;
         }
-        .app-icon {
-            width: 100px;
-            height: 100px;
-            border-radius: 20px;
-            margin-bottom: 15px;
-        }
-        h1 {
-            color: #0056b3;
-            margin-bottom: 5px;
-        }
-        h2 {
-            color: #0056b3;
-            border-bottom: 2px solid #0056b3;
-            padding-bottom: 5px;
-            margin-top: 30px;
-        }
+
         .download-button {
             display: inline-block;
-            background-color: #28a745;
-            color: #fff;
-            padding: 15px 30px;
+            background: linear-gradient(45deg, var(--primary-green), var(--secondary-green));
+            color: var(--white);
+            padding: 16px 32px;
             text-decoration: none;
-            font-size: 1.2em;
-            font-weight: bold;
+            font-size: 1.1em;
+            font-weight: 700;
             border-radius: 50px;
-            margin-top: 20px;
-            transition: background-color 0.3s;
+            margin-top: 25px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 135, 90, 0.3);
+            border: none;
         }
+
         .download-button:hover {
-            background-color: #218838;
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(0, 135, 90, 0.4);
         }
+
         .disclaimer {
             margin-top: 30px;
-            padding: 15px;
-            background-color: #fff3cd;
-            border-left: 5px solid #ffc107;
-            border-radius: 5px;
+            padding: 20px;
+            background-color: var(--warning-bg);
+            border-left: 5px solid var(--warning-border);
+            border-radius: 8px;
         }
+
+        .disclaimer h2 {
+            font-size: 1.3em;
+            color: var(--text-dark);
+            border-bottom: none;
+            margin: 0 0 10px 0;
+        }
+        
         .disclaimer p {
             margin: 0;
+            color: var(--text-light);
         }
+
         ul {
-            padding-left: 20px;
+            padding-left: 0;
+            list-style: none;
         }
+
         li {
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
         }
+
+        li::before {
+            content: '✓';
+            color: var(--secondary-green);
+            font-weight: 800;
+            font-size: 1.2em;
+            margin-right: 15px;
+        }
+        
         footer {
             text-align: center;
-            margin-top: 30px;
+            margin-top: 40px;
+            padding-bottom: 30px;
             font-size: 0.9em;
-            color: #777;
+            color: #94A3B8;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
+
+    <div class="navbar">
+        <div class="navbar-content">
             <!-- GANTI 'URL_ICON_ANDA.png' DENGAN URL LOGO APLIKASI ANDA -->
-            <img src="https://github.com/upt100-nakes/releaseupt/releases/download/v1.0.0/logoupt.png" alt="Logo Aplikasi TOSS TB" class="app-icon">
-            <h1>TOSS TB (Temukan Obati Sampai Sembuh)</h1>
-            <p>Aplikasi Pendamping Digital untuk Kepatuhan Minum Obat Tuberkulosis</p>
+            <img src="https://github.com/upt100-nakes/releaseupt/releases/download/v1.0.0/logoupt.png" alt="Logo TOSS TB" class="navbar-icon">
+            <span class="navbar-title">TOSS TB</span>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card header">
+            <!-- GANTI 'URL_ICON_ANDA.png' DENGAN URL LOGO APLIKASI ANDA -->
+            <img src="https://raw.githubusercontent.com/abettashop-gif/lockUPT/main/ic_launcher-playstore.png" alt="Logo Aplikasi TOSS TB" class="app-icon">
+            <h1>TOSS TB</h1>
+            <p>Aplikasi Pendamping Digital untuk Kepatuhan Pengobatan Tuberkulosis</p>
             
-            <!-- GANTI '#' DENGAN LINK DOWNLOAD APK ANDA (BISA DARI RELEASES GITHUB) -->
-            <a href="https://github.com/abettashop-gif/uptreleaselock/releases/download/v101/UPT_1.0.1_Release.apk" class="download-button">Unduh Aplikasi (.apk)</a>
+            <!-- GANTI '#' DENGAN LINK DOWNLOAD APK ANDA -->
+            <a href="https://github.com/abettashop-gif/uptreleaselock/releases/download/v101/UPT_1.0.1_Release.apk class="download-button">Unduh Aplikasi (.apk)</a>
         </div>
 
-        <h2>Tentang Aplikasi</h2>
-        <p>
-            Aplikasi TOSS TB dirancang sebagai alat bantu digital untuk mendukung pasien dan keluarga dalam menjalani pengobatan Tuberkulosis (TBC). Dengan fitur pengingat yang andal dan pelacakan kepatuhan, aplikasi ini bertujuan untuk memastikan pengobatan berjalan lancar dan tuntas sesuai anjuran tenaga kesehatan.
-        </p>
+        <div class="card">
+            <h2>Fitur Utama</h2>
+            <ul>
+                <li><strong>Alarm Cerdas:</strong> Jadwalkan alarm minum obat untuk pasien dan keluarga yang menjalani Terapi Pencegahan TBC (TPT).</li>
+                <li><strong>Konfirmasi Minum Obat:</strong> Tandai status minum obat setiap hari untuk memantau kepatuhan secara akurat.</li>
+                <li><strong>Laporan Kepatuhan:</strong> Lihat riwayat dan persentase kepatuhan dalam bentuk kalender yang mudah dibaca.</li>
+                <li><strong>Manajemen Keluarga:</strong> Kelola jadwal pengobatan untuk anggota keluarga dalam satu aplikasi.</li>
+                <li><strong>Informasi TBC:</strong> Akses artikel dan informasi penting seputar TBC langsung dari aplikasi.</li>
+                <li><strong>Kontrol Jarak Jauh:</strong> Sistem keamanan untuk mengelola akses aplikasi sesuai kesepakatan.</li>
+            </ul>
+        </div>
 
-        <h2>Fitur Utama</h2>
-        <ul>
-            <li><strong>Alarm Cerdas:</strong> Jadwalkan alarm minum obat untuk pasien utama dan anggota keluarga yang menjalani Terapi Pencegahan TBC (TPT).</li>
-            <li><strong>Konfirmasi Minum Obat:</strong> Tandai status minum obat setiap hari untuk memantau kepatuhan secara akurat.</li>
-            <li><strong>Laporan Kepatuhan:</strong> Lihat riwayat dan persentase kepatuhan minum obat dalam bentuk kalender yang mudah dibaca.</li>
-            <li><strong>Manajemen Keluarga:</strong> Kelola jadwal pengobatan untuk anggota keluarga yang menjalani TPT dalam satu aplikasi.</li>
-            <li><strong>Informasi TBC:</strong> Akses artikel dan informasi penting seputar TBC langsung dari aplikasi.</li>
-            <li><strong>Kontrol Jarak Jauh:</strong> Aplikasi dilengkapi sistem keamanan yang memungkinkan pengembang untuk mengelola akses sesuai dengan kesepakatan.</li>
-        </ul>
+        <div class="card">
+            <div class="disclaimer">
+                <h2>Disclaimer Penting</h2>
+                <p>
+                    Aplikasi ini adalah <strong>alat bantu</strong> dan <strong>bukan pengganti</strong> konsultasi, diagnosis, atau resep medis dari dokter atau tenaga kesehatan profesional. Segala keputusan medis harus selalu didiskusikan dengan dokter Anda.
+                </p>
+            </div>
+        </div>
 
-        <div class="disclaimer">
-            <h2>Disclaimer (Penting untuk Dibaca)</h2>
+        <div class="card">
+            <h2>Privasi dan Keamanan</h2>
             <p>
-                Aplikasi TOSS TB adalah <strong>alat bantu</strong> dan <strong>bukan pengganti</strong> konsultasi, diagnosis, atau resep medis dari dokter atau tenaga kesehatan profesional. Semua keputusan terkait kesehatan dan pengobatan harus selalu didiskusikan dengan dokter Anda. Pengembang tidak bertanggung jawab atas penyalahgunaan informasi atau kelalaian dalam penggunaan aplikasi yang menyebabkan dampak kesehatan.
+                Kami menghargai privasi Anda. Semua data pengobatan disimpan secara lokal di perangkat Anda. Aplikasi hanya terhubung ke internet untuk memeriksa versi aplikasi dan status kontrol jarak jauh secara anonim.
             </p>
         </div>
-
-        <h2>Privasi dan Keamanan</h2>
-        <p>
-            Kami menghargai privasi Anda. Semua data pengobatan, jadwal, dan riwayat disimpan secara lokal di perangkat Anda dan tidak dikirim ke server eksternal mana pun, kecuali untuk pemeriksaan versi aplikasi dan status kontrol jarak jauh yang anonim.
-        </p>
         
-        <footer>
-            <p>&copy; 2024 - Dikembangkan oleh [Nama Anda/Nama Tim Anda]</p>
-        </footer>
     </div>
+
+    <footer>
+        <p>&copy; 2024 - Dikembangkan oleh [Nama Anda/Nama Tim Anda]</p>
+    </footer>
+
 </body>
 </html>
